@@ -1,0 +1,46 @@
+buildscript {
+    ext {
+        springBootVersion = '1.4.3.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+apply plugin: 'groovy'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'boot-spock-sample-app'
+    version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile 'org.springframework.boot:spring-boot-starter-jooq'
+    compile 'org.codehaus.groovy:groovy-all:2.4.1'
+
+    runtime 'org.springframework.boot:spring-boot-devtools'
+    runtime 'com.h2database:h2'
+
+    compile('org.codehaus.groovy:groovy')
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.spockframework:spock-core:1.1-groovy-2.4-rc-1')
+    testCompile('org.spockframework:spock-spring:1.1-groovy-2.4-rc-1')
+    //testCompile group: 'com.h2database', name: 'h2', version: '1.4.192'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.3'
+}
